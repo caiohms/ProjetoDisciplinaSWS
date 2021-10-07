@@ -2,8 +2,9 @@ package com.pucpr.projetoDisciplina.domain.resources;
 
 import com.pucpr.projetoDisciplina.domain.dtos.ProductWithQuantity;
 import com.pucpr.projetoDisciplina.domain.entities.Product;
-import com.pucpr.projetoDisciplina.domain.repositories.ProductRepository;
+import com.pucpr.projetoDisciplina.domain.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -13,8 +14,11 @@ import java.util.List;
 @RequestMapping("/produtos")
 public class ProductResource {
 
-    @Autowired
-    private ProductRepository productRepository;
+    private final ProductService productService;
+
+    public ProductResource(ProductService productService) {
+        this.productService = productService;
+    }
 
 //    @GetMapping
 //    public List<Product> listAllProducts() {
@@ -23,25 +27,22 @@ public class ProductResource {
 
     @GetMapping
     public List<ProductWithQuantity> listAllProductsWithQuantity() {
-        List<ProductWithQuantity> productsList = new ArrayList<>();
-        productRepository.findAll().forEach(product -> productsList.add(new ProductWithQuantity(product.getTitle(), product.getAvailable_quantity())));
-        return productsList;
+        return productService.listAllWithQuantity();
     }
 
     @GetMapping("/test")
-    public void createTestProduct() {
-        productRepository.saveAll(List.of(
-                new Product("TEST1", "Coca-cola", 1),
-                new Product("TEST2", "Pepsi", 2)));
+    public ResponseEntity<String> createTestProduct() {
+        productService.createTestProducts();
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping("/{id}")
     public Product getProductbyId(@PathVariable String id) {
-        return productRepository.getById(id);
+        return productService.getById(id);
     }
 
     @PostMapping
     public Product addProduct(@RequestBody Product product) {
-        return productRepository.save(product);
+        return productService.save(product);
     }
 }
