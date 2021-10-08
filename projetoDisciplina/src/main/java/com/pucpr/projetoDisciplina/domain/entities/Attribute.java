@@ -12,12 +12,10 @@ public class Attribute implements Serializable {
 
     @Id
     @GeneratedValue
-    private long db_id;
+    private long id;
 
-    private String id;
+    private String type;
 
     private String value_name;
 
-    @ManyToOne
-    private Product product;
 }

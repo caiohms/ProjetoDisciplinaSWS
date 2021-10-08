@@ -57,14 +57,15 @@ public class Product implements Serializable {
     public Product() {
     }
 
-    public Product(String id, String title, int available_quantity) {
+    public Product(long id, String title, int available_quantity) {
         this.id = id;
         this.title = title;
         this.available_quantity = available_quantity;
     }
 
     @Id
-    private String id; // "MLB1191972200"
+    @GeneratedValue
+    private long id; // "MLB1191972200"
 
     private String site_id; // "MLB", //Serviço do colega ou o seu próprio
 
@@ -91,15 +92,17 @@ public class Product implements Serializable {
 
     private int available_quantity; // 2,
 
+    @Temporal(TemporalType.DATE)
     private Date start_time; // "2019-03-11T20:12:44.000Z",
 
+    @Temporal(TemporalType.DATE)
     private Date stop_time; // "2039-03-06T04:00:00.000Z",
 
-    private String condition; // "new",
+    private String product_condition; // "new",
 
     private String permalink; // "URLASERDADA/NOMESERVICO/PRODUTO/IDANUNCIO",
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Attribute> attributes;
 
 //    "seller_address":{
@@ -130,11 +133,11 @@ public class Product implements Serializable {
 //    ]
 
 
-    public String getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -242,12 +245,12 @@ public class Product implements Serializable {
         this.stop_time = stop_time;
     }
 
-    public String getCondition() {
-        return condition;
+    public String getProduct_condition() {
+        return product_condition;
     }
 
-    public void setCondition(String condition) {
-        this.condition = condition;
+    public void setProduct_condition(String product_condition) {
+        this.product_condition = product_condition;
     }
 
     public String getPermalink() {

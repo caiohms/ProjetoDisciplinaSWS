@@ -25,8 +25,8 @@ public class ProductService {
 
     public void createTestProducts() {
         productRepository.saveAll(List.of(
-                new Product("TEST1", "Coca-cola", 1),
-                new Product("TEST2", "Pepsi", 2))
+                new Product(1L, "Coca-cola", 1),
+                new Product(2L, "Pepsi", 2))
         );
     }
 
