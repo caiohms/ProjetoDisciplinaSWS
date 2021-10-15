@@ -71,14 +71,16 @@ public class Product implements Serializable {
 
     private String title; // "iPhone Xs 64gb",
 
-    private int id_integracao; // 123123, // Id da integração deve estar preenchido se esse produto tiver sido cadastrado por meio de uma integração.
+    private int id_integracao; // 123123, // Id da integração deve estar preenchido se esse produto tiver sido
+                               // cadastrado por meio de uma integração.
 
     private String subtitle; // null,
 
     @ManyToOne
     private Seller seller;
 
-//    private int seller_id; // 386261073, //Id do vendedor interno do seu micro serviço ou o Id que deu para o vendedor que esta publicando
+    // private int seller_id; // 386261073, //Id do vendedor interno do seu micro
+    // serviço ou o Id que deu para o vendedor que esta publicando
 
     private int price; // 7299,
 
@@ -105,33 +107,33 @@ public class Product implements Serializable {
     @OneToMany(cascade = CascadeType.ALL)
     private List<Attribute> attributes;
 
-//    "seller_address":{
-//        "city":{
-//            "id":"TUxCQ1NFUmI1ZGQx",
-//            "name":"Serra"
-//        },
-//        "state":{
-//            "id":"BR-ES",
-//            "name":"Espírito Santo"
-//        },
-//        "country":{
-//            "id":"BR",
-//            "name":"Brasil"
-//        },
-//        "id":1017932319
-//    },
-//    "seller_contact":null,
-//    "attributes":[
-//            {
-//                "id":"BRAND",
-//                "value_name":"Marca del producto"
-//            },
-//            {
-//                "id":"EAN", //Dúvidas sobre EAN https://magis5.com.br/o-que-e-codigo-ean-para-queserve/
-//                "value_name":"7898095297749"
-//            }
-//    ]
-
+    // "seller_address":{
+    // "city":{
+    // "id":"TUxCQ1NFUmI1ZGQx",
+    // "name":"Serra"
+    // },
+    // "state":{
+    // "id":"BR-ES",
+    // "name":"Espírito Santo"
+    // },
+    // "country":{
+    // "id":"BR",
+    // "name":"Brasil"
+    // },
+    // "id":1017932319
+    // },
+    // "seller_contact":null,
+    // "attributes":[
+    // {
+    // "id":"BRAND",
+    // "value_name":"Marca del producto"
+    // },
+    // {
+    // "id":"EAN", //Dúvidas sobre EAN
+    // https://magis5.com.br/o-que-e-codigo-ean-para-queserve/
+    // "value_name":"7898095297749"
+    // }
+    // ]
 
     public long getId() {
         return id;
