@@ -107,33 +107,34 @@ public class Product implements Serializable {
     @OneToMany(cascade = CascadeType.ALL)
     private List<Attribute> attributes;
 
-    // "seller_address":{
-    // "city":{
-    // "id":"TUxCQ1NFUmI1ZGQx",
-    // "name":"Serra"
-    // },
-    // "state":{
-    // "id":"BR-ES",
-    // "name":"Espírito Santo"
-    // },
-    // "country":{
-    // "id":"BR",
-    // "name":"Brasil"
-    // },
-    // "id":1017932319
-    // },
-    // "seller_contact":null,
-    // "attributes":[
-    // {
-    // "id":"BRAND",
-    // "value_name":"Marca del producto"
-    // },
-    // {
-    // "id":"EAN", //Dúvidas sobre EAN
-    // https://magis5.com.br/o-que-e-codigo-ean-para-queserve/
-    // "value_name":"7898095297749"
-    // }
-    // ]
+/*
+    "seller_address":{
+        "city":{
+            "id":"TUxCQ1NFUmI1ZGQx",
+            "name":"Serra"
+        },
+        "state":{
+            "id":"BR-ES",
+            "name":"Espírito Santo"
+        },
+        "country":{
+            "id":"BR",
+            "name":"Brasil"
+        },
+        "id":1017932319
+    },
+    "seller_contact":null,
+    "attributes":[
+            {
+                "id":"BRAND",
+                "value_name":"Marca del producto"
+            },
+            {
+                "id":"EAN", //Dúvidas sobre EAN https://magis5.com.br/o-que-e-codigo-ean-para-queserve/
+                "value_name":"7898095297749"
+            }
+    ]
+*/
 
     public long getId() {
         return id;

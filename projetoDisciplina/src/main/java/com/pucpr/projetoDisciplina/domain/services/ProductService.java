@@ -23,7 +23,10 @@ public class ProductService {
     }
 
     public void createTestProducts() {
-        productRepository.saveAll(List.of(new Product(1L, "Coca-cola", 1), new Product(2L, "Pepsi", 2)));
+        productRepository.saveAll(List.of(
+                new Product(1L, "Coca-cola", 1),
+                new Product(2L, "Pepsi", 2))
+        );
     }
 
     public List<ProductWithQuantity> listAllWithQuantity() {
