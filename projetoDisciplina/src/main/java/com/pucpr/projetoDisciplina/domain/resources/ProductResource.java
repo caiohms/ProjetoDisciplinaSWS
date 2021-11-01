@@ -3,11 +3,9 @@ package com.pucpr.projetoDisciplina.domain.resources;
 import com.pucpr.projetoDisciplina.domain.dtos.ProductWithQuantity;
 import com.pucpr.projetoDisciplina.domain.entities.Product;
 import com.pucpr.projetoDisciplina.domain.services.ProductService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
