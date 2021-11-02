@@ -1,5 +1,6 @@
 package com.pucpr.projetoDisciplina.domain.resources;
 
+import com.pucpr.projetoDisciplina.domain.dtos.ProductDTO;
 import com.pucpr.projetoDisciplina.domain.dtos.ProductWithQuantity;
 import com.pucpr.projetoDisciplina.domain.entities.Product;
 import com.pucpr.projetoDisciplina.domain.services.ProductService;
@@ -18,14 +19,14 @@ public class ProductResource {
         this.productService = productService;
     }
 
-//    @GetMapping
-//    public List<Product> listAllProducts() {
-//        return productRepository.findAll();
-//    }
+    @GetMapping("/all")
+    public List<ProductDTO> listAllProducts() {
+        return productService.getAll();
+    }
 
     @GetMapping
     public List<ProductWithQuantity> listAllProductsWithQuantity() {
-        return productService.listAllWithQuantity();
+        return productService.getAllWithQuantity();
     }
 
     @GetMapping("/test")
@@ -35,12 +36,17 @@ public class ProductResource {
     }
 
     @GetMapping("/{id}")
-    public Product getProductbyId(@PathVariable String id) {
+    public Product getProductbyId(@PathVariable Long id) {
         return productService.getById(id);
     }
 
-    @PostMapping
-    public Product addProduct(@RequestBody Product product) {
-        return productService.save(product);
+//    @PostMapping
+//    public void addProduct(@RequestBody ProductDTO productDTO ) {
+//       // return productService.saveProductDTO(productDTO);
+//    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteProduct(@PathVariable Long id) {
+        return productService.deleteById(id);
     }
 }

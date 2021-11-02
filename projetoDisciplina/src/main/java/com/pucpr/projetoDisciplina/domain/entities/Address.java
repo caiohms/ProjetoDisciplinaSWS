@@ -23,19 +23,56 @@ public class Address implements Serializable {
 //        "id":1017932319
 //    },
 
+
     @Id
     @GeneratedValue
     private long id;
-
     @OneToOne
     private Seller seller;
-
     @ManyToOne
     private City city;
-
     @ManyToOne
     private State state;
-
     @ManyToOne
     private Country country;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public Seller getSeller() {
+        return seller;
+    }
+
+    public void setSeller(Seller seller) {
+        this.seller = seller;
+    }
+
+    public City getCity() {
+        return city;
+    }
+
+    public void setCity(City city) {
+        this.city = city;
+    }
+
+    public State getState() {
+        return state;
+    }
+
+    public void setState(State state) {
+        this.state = state;
+    }
+
+    public Country getCountry() {
+        return country;
+    }
+
+    public void setCountry(Country country) {
+        this.country = country;
+    }
 }

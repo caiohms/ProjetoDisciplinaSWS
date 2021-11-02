@@ -1,8 +1,10 @@
 package com.pucpr.projetoDisciplina.domain.services;
 
+import com.pucpr.projetoDisciplina.domain.dtos.ProductDTO;
 import com.pucpr.projetoDisciplina.domain.dtos.ProductWithQuantity;
 import com.pucpr.projetoDisciplina.domain.entities.Product;
 import com.pucpr.projetoDisciplina.domain.repositories.ProductRepository;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -17,11 +19,6 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
-    public Product saveProduct(Product product) {
-        productRepository.save(product);
-        return product;
-    }
-
     public void createTestProducts() {
         productRepository.saveAll(List.of(
                 new Product(1L, "Coca-cola", 1),
@@ -29,18 +26,29 @@ public class ProductService {
         );
     }
 
-    public List<ProductWithQuantity> listAllWithQuantity() {
+    public List<ProductWithQuantity> getAllWithQuantity() {
         List<ProductWithQuantity> productsList = new ArrayList<>();
         productRepository.findAll().forEach(product -> productsList
                 .add(new ProductWithQuantity(product.getTitle(), product.getAvailable_quantity())));
         return productsList;
     }
 
-    public Product getById(String id) {
+    public List<ProductDTO> getAll() {
+        List<ProductDTO> productsList = new ArrayList<>();
+        productRepository.findAll().forEach(product -> productsList.add(new ProductDTO(product)));
+        return productsList;
+    }
+
+    public Product getById(Long id) {
         return productRepository.getById(id);
     }
 
     public Product save(Product product) {
         return productRepository.save(product);
+    }
+
+    public ResponseEntity<String> deleteById(Long id) {
+        productRepository.deleteById(id);
+        return ResponseEntity.ok().build();
     }
 }

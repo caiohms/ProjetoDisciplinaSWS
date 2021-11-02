@@ -1,5 +1,7 @@
 package com.pucpr.projetoDisciplina.domain.entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -45,7 +47,7 @@ import java.util.List;
             "value_name":"Marca del producto"
         },
         {
-            "id":"EAN", //Dúvidas sobre EAN https://magis5.com.br/o-que-e-codigo-ean-para-queserve/
+            "id":"EAN",
             "value_name":"7898095297749"
         }
     ]
@@ -65,7 +67,7 @@ public class Product implements Serializable {
 
     @Id
     @GeneratedValue
-    private long id; // "MLB1191972200"
+    private Long id; // "MLB1191972200"
 
     private String site_id; // "MLB", //Serviço do colega ou o seu próprio
 
@@ -100,6 +102,7 @@ public class Product implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date stop_time; // "2039-03-06T04:00:00.000Z",
 
+    @JsonProperty("condition")
     private String product_condition; // "new",
 
     private String permalink; // "URLASERDADA/NOMESERVICO/PRODUTO/IDANUNCIO",
@@ -107,40 +110,11 @@ public class Product implements Serializable {
     @OneToMany(cascade = CascadeType.ALL)
     private List<Attribute> attributes;
 
-/*
-    "seller_address":{
-        "city":{
-            "id":"TUxCQ1NFUmI1ZGQx",
-            "name":"Serra"
-        },
-        "state":{
-            "id":"BR-ES",
-            "name":"Espírito Santo"
-        },
-        "country":{
-            "id":"BR",
-            "name":"Brasil"
-        },
-        "id":1017932319
-    },
-    "seller_contact":null,
-    "attributes":[
-            {
-                "id":"BRAND",
-                "value_name":"Marca del producto"
-            },
-            {
-                "id":"EAN", //Dúvidas sobre EAN https://magis5.com.br/o-que-e-codigo-ean-para-queserve/
-                "value_name":"7898095297749"
-            }
-    ]
-*/
-
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

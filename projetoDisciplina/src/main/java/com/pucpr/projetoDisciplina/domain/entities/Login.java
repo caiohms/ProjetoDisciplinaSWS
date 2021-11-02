@@ -2,6 +2,7 @@ package com.pucpr.projetoDisciplina.domain.entities;
 
 public class Login {
 
+
     private String username;
     private String password;
 
