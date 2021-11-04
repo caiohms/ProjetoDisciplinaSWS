@@ -1,6 +1,11 @@
 package com.pucpr.projetoDisciplina.domain.entities;
 
-import javax.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.io.Serializable;
 
 @Entity
@@ -12,8 +17,10 @@ public class Attribute implements Serializable {
 
     @Id
     @GeneratedValue
-    private long id;
+    @JsonIgnore
+    private Long dbid;
 
+    @JsonProperty("id")
     private String type;
 
     private String value_name;
@@ -22,12 +29,12 @@ public class Attribute implements Serializable {
         this.value_name = value_name;
     }
 
-    public long getId() {
-        return id;
+    public Long getDbid() {
+        return dbid;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setDbid(Long dbid) {
+        this.dbid = dbid;
     }
 
     public String getType() {

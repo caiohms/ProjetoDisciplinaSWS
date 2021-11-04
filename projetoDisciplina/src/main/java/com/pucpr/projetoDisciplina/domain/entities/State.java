@@ -13,7 +13,6 @@ public class State implements Serializable {
 
     @Id
     private String id;
-
     private String name;
 
     public String getId() {

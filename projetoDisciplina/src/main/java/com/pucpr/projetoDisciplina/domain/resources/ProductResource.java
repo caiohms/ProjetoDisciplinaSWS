@@ -8,7 +8,6 @@ import com.pucpr.projetoDisciplina.domain.services.ProductService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -28,7 +27,7 @@ public class ProductResource {
 
     @GetMapping
     public List<ProductWithQuantity> listAllProductsWithQuantity() {
-        return productService.listAllWithQuantity();
+        return productService.getAllWithQuantity();
     }
 
     @GetMapping("/test")
@@ -38,13 +37,17 @@ public class ProductResource {
     }
 
     @GetMapping("/{id}")
-    public Product getProductbyId(@PathVariable String id) {
+    public Product getProductbyId(@PathVariable Long id) {
         return productService.getById(id);
     }
 
     @PostMapping
     public ProductResponseDto addProduct(@RequestBody RegisterProductDto product) {
         Product newProduct = productService.saveProduct(product);
-        return new ProductResponseDto(newProduct);
+        return new ProductResponseDto(newProduct);}
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteProduct(@PathVariable Long id) {
+        return productService.deleteById(id);
     }
 }

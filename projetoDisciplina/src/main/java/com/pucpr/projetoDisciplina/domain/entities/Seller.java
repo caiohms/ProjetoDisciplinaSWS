@@ -10,7 +10,7 @@ public class Seller implements Serializable {
     @Id
     private long id;
 
-    @OneToMany(mappedBy = "seller")
+    @OneToMany(mappedBy = "seller", cascade = CascadeType.ALL)
     private List<Product> productsList;
 
     @OneToOne(cascade = CascadeType.ALL)
