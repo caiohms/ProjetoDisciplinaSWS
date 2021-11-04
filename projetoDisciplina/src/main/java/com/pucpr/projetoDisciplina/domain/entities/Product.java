@@ -135,6 +135,28 @@ public class Product implements Serializable {
     // }
     // ]
 
+    public Product(String site_id, String title, int id_integracao, String subtitle, Seller seller,
+                   int price, int base_price, int original_price, String currency_id, int initial_quantity,
+                   int available_quantity, Date start_time, Date stop_time, String product_condition,
+                   String permalink, List<Attribute> attributes) {
+        this.site_id = site_id;
+        this.title = title;
+        this.id_integracao = id_integracao;
+        this.subtitle = subtitle;
+        this.seller = seller;
+        this.price = price;
+        this.base_price = base_price;
+        this.original_price = original_price;
+        this.currency_id = currency_id;
+        this.initial_quantity = initial_quantity;
+        this.available_quantity = available_quantity;
+        this.start_time = start_time;
+        this.stop_time = stop_time;
+        this.product_condition = product_condition;
+        this.permalink = permalink;
+        this.attributes = attributes;
+    }
+
     public long getId() {
         return id;
     }
