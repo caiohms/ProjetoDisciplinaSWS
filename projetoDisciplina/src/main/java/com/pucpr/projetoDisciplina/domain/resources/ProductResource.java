@@ -1,5 +1,6 @@
 package com.pucpr.projetoDisciplina.domain.resources;
 
+import com.pucpr.projetoDisciplina.domain.dtos.ProductResponseDto;
 import com.pucpr.projetoDisciplina.domain.dtos.ProductWithQuantity;
 import com.pucpr.projetoDisciplina.domain.dtos.RegisterProductDto;
 import com.pucpr.projetoDisciplina.domain.entities.Product;
@@ -42,7 +43,8 @@ public class ProductResource {
     }
 
     @PostMapping
-    public Product addProduct(@RequestBody RegisterProductDto product) {
-        return productService.saveProduct(product);
+    public ProductResponseDto addProduct(@RequestBody RegisterProductDto product) {
+        Product newProduct = productService.saveProduct(product);
+        return new ProductResponseDto(newProduct);
     }
 }

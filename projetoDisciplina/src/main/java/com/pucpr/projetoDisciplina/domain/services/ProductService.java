@@ -3,9 +3,7 @@ package com.pucpr.projetoDisciplina.domain.services;
 import com.pucpr.projetoDisciplina.domain.dtos.ProductWithQuantity;
 import com.pucpr.projetoDisciplina.domain.dtos.RegisterProductDto;
 import com.pucpr.projetoDisciplina.domain.entities.Product;
-import com.pucpr.projetoDisciplina.domain.repositories.AddressRepository;
-import com.pucpr.projetoDisciplina.domain.repositories.ProductRepository;
-import com.pucpr.projetoDisciplina.domain.repositories.SellerRepository;
+import com.pucpr.projetoDisciplina.domain.repositories.*;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -20,15 +18,26 @@ public class ProductService {
 
     private final AddressRepository addressRepository;
 
+    private final CityRepository cityRepository;
+
+    private final StateRepository stateRepository;
+
+    private final CountryRepository countryRepository;
+
     public ProductService(ProductRepository productRepository, SellerRepository sellerRepository,
-                          AddressRepository addressRepository) {
+                          AddressRepository addressRepository, CityRepository cityRepository,
+                          StateRepository stateRepository, CountryRepository countryRepository) {
         this.productRepository = productRepository;
         this.sellerRepository = sellerRepository;
         this.addressRepository = addressRepository;
+        this.cityRepository = cityRepository;
+        this.stateRepository = stateRepository;
+        this.countryRepository = countryRepository;
     }
 
     public Product saveProduct(RegisterProductDto product) {
-        Product newProduct = product.createProduct(productRepository, sellerRepository, addressRepository);
+        Product newProduct = product.createProduct(sellerRepository, addressRepository,
+                cityRepository, stateRepository, countryRepository);
         productRepository.save(newProduct);
         return newProduct;
     }

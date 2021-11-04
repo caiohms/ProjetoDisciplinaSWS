@@ -76,7 +76,7 @@ public class Product implements Serializable {
 
     private String subtitle; // null,
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Seller seller;
 
     // private int seller_id; // 386261073, //Id do vendedor interno do seu micro

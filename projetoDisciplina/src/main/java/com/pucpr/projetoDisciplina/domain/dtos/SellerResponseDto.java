@@ -1,28 +1,30 @@
-package com.pucpr.projetoDisciplina.domain.entities;
+package com.pucpr.projetoDisciplina.domain.dtos;
 
-import javax.persistence.*;
-import java.io.Serializable;
+import com.pucpr.projetoDisciplina.domain.entities.Address;
+import com.pucpr.projetoDisciplina.domain.entities.Product;
+import com.pucpr.projetoDisciplina.domain.entities.Seller;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import java.util.List;
 
-@Entity
-public class Seller implements Serializable {
+public class SellerResponseDto {
 
-    @Id
     private long id;
 
-    @OneToMany(mappedBy = "seller")
     private List<Product> productsList;
 
-    @OneToOne(cascade = CascadeType.ALL)
     private Address address;
 
     private String contact;
 
-    public Seller() {}
-
-    public Seller(long id, String contact) {
-        this.id = id;
-        this.contact = contact;
+    public SellerResponseDto(Seller seller) {
+        this.id = seller.getId();
+        this.productsList = seller.getProductsList();
+        this.address = new AddressResponseDto(seller.getAddress());
+        this.contact = seller.getContact();
     }
 
     public long getId() {
