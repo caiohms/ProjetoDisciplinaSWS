@@ -1,8 +1,11 @@
 package com.pucpr.projetoDisciplina.domain.services;
 
 import com.pucpr.projetoDisciplina.domain.dtos.ProductWithQuantity;
+import com.pucpr.projetoDisciplina.domain.dtos.RegisterProductDto;
 import com.pucpr.projetoDisciplina.domain.entities.Product;
+import com.pucpr.projetoDisciplina.domain.repositories.AddressRepository;
 import com.pucpr.projetoDisciplina.domain.repositories.ProductRepository;
+import com.pucpr.projetoDisciplina.domain.repositories.SellerRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -13,13 +16,21 @@ public class ProductService {
 
     private final ProductRepository productRepository;
 
-    public ProductService(ProductRepository productRepository) {
+    private final SellerRepository sellerRepository;
+
+    private final AddressRepository addressRepository;
+
+    public ProductService(ProductRepository productRepository, SellerRepository sellerRepository,
+                          AddressRepository addressRepository) {
         this.productRepository = productRepository;
+        this.sellerRepository = sellerRepository;
+        this.addressRepository = addressRepository;
     }
 
-    public Product saveProduct(Product product) {
-        productRepository.save(product);
-        return product;
+    public Product saveProduct(RegisterProductDto product) {
+        Product newProduct = product.createProduct(productRepository, sellerRepository, addressRepository);
+        productRepository.save(newProduct);
+        return newProduct;
     }
 
     public void createTestProducts() {

@@ -1,6 +1,7 @@
 package com.pucpr.projetoDisciplina.domain.resources;
 
 import com.pucpr.projetoDisciplina.domain.dtos.ProductWithQuantity;
+import com.pucpr.projetoDisciplina.domain.dtos.RegisterProductDto;
 import com.pucpr.projetoDisciplina.domain.entities.Product;
 import com.pucpr.projetoDisciplina.domain.services.ProductService;
 import org.springframework.http.ResponseEntity;
@@ -41,7 +42,7 @@ public class ProductResource {
     }
 
     @PostMapping
-    public Product addProduct(@RequestBody Product product) {
-        return productService.save(product);
+    public Product addProduct(@RequestBody RegisterProductDto product) {
+        return productService.saveProduct(product);
     }
 }
