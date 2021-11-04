@@ -4,10 +4,6 @@ import com.pucpr.projetoDisciplina.domain.entities.Address;
 import com.pucpr.projetoDisciplina.domain.entities.Product;
 import com.pucpr.projetoDisciplina.domain.entities.Seller;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import java.util.List;
 
 public class SellerResponseDto {

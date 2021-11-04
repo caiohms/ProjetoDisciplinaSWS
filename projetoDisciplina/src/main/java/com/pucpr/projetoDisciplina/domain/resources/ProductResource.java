@@ -20,10 +20,10 @@ public class ProductResource {
         this.productService = productService;
     }
 
-    // @GetMapping
-    // public List<Product> listAllProducts() {
-    // return productRepository.findAll();
-    // }
+    @GetMapping
+    public List<ProductResponseDto> listAllProducts() {
+        return productService.getAll();
+    }
 
     @GetMapping
     public List<ProductWithQuantity> listAllProductsWithQuantity() {
@@ -37,14 +37,15 @@ public class ProductResource {
     }
 
     @GetMapping("/{id}")
-    public Product getProductbyId(@PathVariable Long id) {
+    public ProductResponseDto getProductbyId(@PathVariable Long id) {
         return productService.getById(id);
     }
 
     @PostMapping
     public ProductResponseDto addProduct(@RequestBody RegisterProductDto product) {
         Product newProduct = productService.saveProduct(product);
-        return new ProductResponseDto(newProduct);}
+        return new ProductResponseDto(newProduct);
+    }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteProduct(@PathVariable Long id) {

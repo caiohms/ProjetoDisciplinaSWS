@@ -1,6 +1,9 @@
 package com.pucpr.projetoDisciplina.domain.dtos;
 
-import com.pucpr.projetoDisciplina.domain.entities.*;
+import com.pucpr.projetoDisciplina.domain.entities.Address;
+import com.pucpr.projetoDisciplina.domain.entities.City;
+import com.pucpr.projetoDisciplina.domain.entities.Country;
+import com.pucpr.projetoDisciplina.domain.entities.State;
 import com.pucpr.projetoDisciplina.domain.repositories.AddressRepository;
 import com.pucpr.projetoDisciplina.domain.repositories.CityRepository;
 import com.pucpr.projetoDisciplina.domain.repositories.CountryRepository;
@@ -22,11 +25,7 @@ public class SellerAddressDto {
                            StateRepository stateRepository, CountryRepository countryRepository) {
         Optional<Address> optionalAddress = addressRepository.findById(getId());
 
-        if (optionalAddress.isPresent()) {
-            Address findAddress = optionalAddress.get();
-
-            return optionalAddress.get();
-        }
+        if (optionalAddress.isPresent()) return optionalAddress.get();
 
         Address newAddress = new Address(getCity(), getState(), getCountry());
         cityRepository.save(newAddress.getCity());
@@ -36,11 +35,17 @@ public class SellerAddressDto {
         return newAddress;
     }
 
-    public long getId() { return id; }
+    public long getId() {
+        return id;
+    }
 
-    public void setId(long id) { this.id = id; }
+    public void setId(long id) {
+        this.id = id;
+    }
 
-    public City getCity() { return city; }
+    public City getCity() {
+        return city;
+    }
 
     public void setCity(City city) {
         this.city = city;

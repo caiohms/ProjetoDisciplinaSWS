@@ -1,8 +1,9 @@
 package com.pucpr.projetoDisciplina.domain.dtos;
 
-import com.pucpr.projetoDisciplina.domain.entities.*;
-
-import javax.persistence.*;
+import com.pucpr.projetoDisciplina.domain.entities.Address;
+import com.pucpr.projetoDisciplina.domain.entities.City;
+import com.pucpr.projetoDisciplina.domain.entities.Country;
+import com.pucpr.projetoDisciplina.domain.entities.State;
 
 public class AddressResponseDto extends Address {
 
@@ -15,10 +16,10 @@ public class AddressResponseDto extends Address {
     private Country country;
 
     public AddressResponseDto(Address address) {
-       this.id = address.getId();
-       this.city = address.getCity();
-       this.state = address.getState();
-       this.country = address.getCountry();
+        this.id = address.getId();
+        this.city = address.getCity();
+        this.state = address.getState();
+        this.country = address.getCountry();
     }
 
     @Override

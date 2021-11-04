@@ -43,7 +43,8 @@ public class Address implements Serializable {
     @JoinColumn(name = "country_id")
     private Country country;
 
-    public Address() {}
+    public Address() {
+    }
 
     public Address(City city, State state, Country country) {
         this.city = city;

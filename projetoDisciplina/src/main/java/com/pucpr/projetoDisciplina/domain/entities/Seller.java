@@ -18,7 +18,8 @@ public class Seller implements Serializable {
 
     private String contact;
 
-    public Seller() {}
+    public Seller() {
+    }
 
     public Seller(long id, String contact) {
         this.id = id;

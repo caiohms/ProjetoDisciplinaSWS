@@ -29,6 +29,9 @@ public class Attribute implements Serializable {
         this.value_name = value_name;
     }
 
+    public Attribute() {
+    }
+
     public Long getDbid() {
         return dbid;
     }
