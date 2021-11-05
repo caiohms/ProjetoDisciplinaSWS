@@ -1,5 +1,7 @@
 package com.pucpr.projetoDisciplina.domain.entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -54,6 +56,40 @@ import java.util.List;
 
 @Entity
 public class Product implements Serializable {
+    @Id
+    @GeneratedValue
+    private Long id; // "MLB1191972200"
+    private String site_id; // "MLB", //Serviço do colega ou o seu próprio
+    private String title; // "iPhone Xs 64gb",
+    private int id_integracao; // 123123, // Id da integração deve estar preenchido se esse produto tiver sido
+    private String subtitle; // null,
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Seller seller;
+    // cadastrado por meio de uma integração.
+    private int price; // 7299,
+    private int base_price; // 7299,
+
+    // private int seller_id; // 386261073, //Id do vendedor interno do seu micro
+    // serviço ou o Id que deu para o vendedor que esta publicando
+    private int original_price; // null,
+    private String currency_id; // "BRL",
+    private int initial_quantity; // 5,
+    private int available_quantity; // 2,
+
+    @Temporal(TemporalType.DATE)
+    private Date start_time; // "2019-03-11T20:12:44.000Z",
+
+    @Temporal(TemporalType.DATE)
+    private Date stop_time; // "2039-03-06T04:00:00.000Z",
+
+    @JsonProperty("condition")
+    private String product_condition; // "new",
+    private String permalink; // "URLASERDADA/NOMESERVICO/PRODUTO/IDANUNCIO",
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Attribute> attributes;
+
     public Product() {
     }
 
@@ -63,84 +99,33 @@ public class Product implements Serializable {
         this.available_quantity = available_quantity;
     }
 
-    @Id
-    @GeneratedValue
-    private long id; // "MLB1191972200"
+    public Product(String site_id, String title, int id_integracao, String subtitle, Seller seller,
+                   int price, int base_price, int original_price, String currency_id, int initial_quantity,
+                   int available_quantity, Date start_time, Date stop_time, String product_condition,
+                   String permalink, List<Attribute> attributes) {
+        this.site_id = site_id;
+        this.title = title;
+        this.id_integracao = id_integracao;
+        this.subtitle = subtitle;
+        this.seller = seller;
+        this.price = price;
+        this.base_price = base_price;
+        this.original_price = original_price;
+        this.currency_id = currency_id;
+        this.initial_quantity = initial_quantity;
+        this.available_quantity = available_quantity;
+        this.start_time = start_time;
+        this.stop_time = stop_time;
+        this.product_condition = product_condition;
+        this.permalink = permalink;
+        this.attributes = attributes;
+    }
 
-    private String site_id; // "MLB", //Serviço do colega ou o seu próprio
-
-    private String title; // "iPhone Xs 64gb",
-
-    private int id_integracao; // 123123, // Id da integração deve estar preenchido se esse produto tiver sido
-                               // cadastrado por meio de uma integração.
-
-    private String subtitle; // null,
-
-    @ManyToOne
-    private Seller seller;
-
-    // private int seller_id; // 386261073, //Id do vendedor interno do seu micro
-    // serviço ou o Id que deu para o vendedor que esta publicando
-
-    private int price; // 7299,
-
-    private int base_price; // 7299,
-
-    private int original_price; // null,
-
-    private String currency_id; // "BRL",
-
-    private int initial_quantity; // 5,
-
-    private int available_quantity; // 2,
-
-    @Temporal(TemporalType.DATE)
-    private Date start_time; // "2019-03-11T20:12:44.000Z",
-
-    @Temporal(TemporalType.DATE)
-    private Date stop_time; // "2039-03-06T04:00:00.000Z",
-
-    private String product_condition; // "new",
-
-    private String permalink; // "URLASERDADA/NOMESERVICO/PRODUTO/IDANUNCIO",
-
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<Attribute> attributes;
-
-/*
-    "seller_address":{
-        "city":{
-            "id":"TUxCQ1NFUmI1ZGQx",
-            "name":"Serra"
-        },
-        "state":{
-            "id":"BR-ES",
-            "name":"Espírito Santo"
-        },
-        "country":{
-            "id":"BR",
-            "name":"Brasil"
-        },
-        "id":1017932319
-    },
-    "seller_contact":null,
-    "attributes":[
-            {
-                "id":"BRAND",
-                "value_name":"Marca del producto"
-            },
-            {
-                "id":"EAN", //Dúvidas sobre EAN https://magis5.com.br/o-que-e-codigo-ean-para-queserve/
-                "value_name":"7898095297749"
-            }
-    ]
-*/
-
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
