@@ -1,7 +1,8 @@
 package com.pucpr.projetoDisciplina.domain.resources;
 
-import com.pucpr.projetoDisciplina.domain.dtos.ProductDTO;
+import com.pucpr.projetoDisciplina.domain.dtos.ProductResponseDto;
 import com.pucpr.projetoDisciplina.domain.dtos.ProductWithQuantity;
+import com.pucpr.projetoDisciplina.domain.dtos.RegisterProductDto;
 import com.pucpr.projetoDisciplina.domain.entities.Product;
 import com.pucpr.projetoDisciplina.domain.services.ProductService;
 import org.springframework.http.ResponseEntity;
@@ -19,12 +20,12 @@ public class ProductResource {
         this.productService = productService;
     }
 
-    @GetMapping("/all")
-    public List<ProductDTO> listAllProducts() {
+    @GetMapping
+    public List<ProductResponseDto> listAllProducts() {
         return productService.getAll();
     }
 
-    @GetMapping
+    @GetMapping("/quantidades")
     public List<ProductWithQuantity> listAllProductsWithQuantity() {
         return productService.getAllWithQuantity();
     }
@@ -36,14 +37,15 @@ public class ProductResource {
     }
 
     @GetMapping("/{id}")
-    public Product getProductbyId(@PathVariable Long id) {
+    public ProductResponseDto getProductbyId(@PathVariable Long id) {
         return productService.getById(id);
     }
 
-//    @PostMapping
-//    public void addProduct(@RequestBody ProductDTO productDTO ) {
-//       // return productService.saveProductDTO(productDTO);
-//    }
+    @PostMapping
+    public ProductResponseDto addProduct(@RequestBody RegisterProductDto product) {
+        Product newProduct = productService.saveProduct(product);
+        return new ProductResponseDto(newProduct);
+    }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteProduct(@PathVariable Long id) {

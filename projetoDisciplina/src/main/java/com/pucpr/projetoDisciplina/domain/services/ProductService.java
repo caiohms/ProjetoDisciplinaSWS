@@ -1,9 +1,10 @@
 package com.pucpr.projetoDisciplina.domain.services;
 
-import com.pucpr.projetoDisciplina.domain.dtos.ProductDTO;
+import com.pucpr.projetoDisciplina.domain.dtos.ProductResponseDto;
 import com.pucpr.projetoDisciplina.domain.dtos.ProductWithQuantity;
+import com.pucpr.projetoDisciplina.domain.dtos.RegisterProductDto;
 import com.pucpr.projetoDisciplina.domain.entities.Product;
-import com.pucpr.projetoDisciplina.domain.repositories.ProductRepository;
+import com.pucpr.projetoDisciplina.domain.repositories.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -15,8 +16,32 @@ public class ProductService {
 
     private final ProductRepository productRepository;
 
-    public ProductService(ProductRepository productRepository) {
+    private final SellerRepository sellerRepository;
+
+    private final AddressRepository addressRepository;
+
+    private final CityRepository cityRepository;
+
+    private final StateRepository stateRepository;
+
+    private final CountryRepository countryRepository;
+
+    public ProductService(ProductRepository productRepository, SellerRepository sellerRepository,
+                          AddressRepository addressRepository, CityRepository cityRepository,
+                          StateRepository stateRepository, CountryRepository countryRepository) {
         this.productRepository = productRepository;
+        this.sellerRepository = sellerRepository;
+        this.addressRepository = addressRepository;
+        this.cityRepository = cityRepository;
+        this.stateRepository = stateRepository;
+        this.countryRepository = countryRepository;
+    }
+
+    public Product saveProduct(RegisterProductDto product) {
+        Product newProduct = product.createProduct(sellerRepository, addressRepository,
+                cityRepository, stateRepository, countryRepository);
+        productRepository.save(newProduct);
+        return newProduct;
     }
 
     public void createTestProducts() {
@@ -33,14 +58,14 @@ public class ProductService {
         return productsList;
     }
 
-    public List<ProductDTO> getAll() {
-        List<ProductDTO> productsList = new ArrayList<>();
-        productRepository.findAll().forEach(product -> productsList.add(new ProductDTO(product)));
+    public List<ProductResponseDto> getAll() {
+        List<ProductResponseDto> productsList = new ArrayList<>();
+        productRepository.findAll().forEach(product -> productsList.add(new ProductResponseDto(product)));
         return productsList;
     }
 
-    public Product getById(Long id) {
-        return productRepository.getById(id);
+    public ProductResponseDto getById(Long id) {
+        return new ProductResponseDto(productRepository.getById(id));
     }
 
     public Product save(Product product) {

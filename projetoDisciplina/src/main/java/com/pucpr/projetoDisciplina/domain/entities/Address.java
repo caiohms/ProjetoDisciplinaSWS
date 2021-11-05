@@ -27,14 +27,30 @@ public class Address implements Serializable {
     @Id
     @GeneratedValue
     private long id;
+
     @OneToOne
     private Seller seller;
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "city_id")
     private City city;
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "state_id")
     private State state;
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "country_id")
     private Country country;
+
+    public Address() {
+    }
+
+    public Address(City city, State state, Country country) {
+        this.city = city;
+        this.state = state;
+        this.country = country;
+    }
 
     public long getId() {
         return id;
