@@ -25,7 +25,7 @@ public class ProductResource {
         return productService.getAll();
     }
 
-    @GetMapping
+    @GetMapping("/quantidades")
     public List<ProductWithQuantity> listAllProductsWithQuantity() {
         return productService.getAllWithQuantity();
     }
