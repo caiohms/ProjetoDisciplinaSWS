@@ -31,15 +31,15 @@ public class Address implements Serializable {
     @OneToOne
     private Seller seller;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER) // TODO: fetch type precisa ser eager porque  se não da erro no retorno do address
     @JoinColumn(name = "city_id")
     private City city;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER) // TODO: fetch type precisa ser eager porque  se não da erro no retorno do address
     @JoinColumn(name = "state_id")
     private State state;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER) // TODO: fetch type precisa ser eager porque  se não da erro no retorno do address
     @JoinColumn(name = "country_id")
     private Country country;
 

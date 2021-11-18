@@ -5,7 +5,7 @@ import com.pucpr.projetoDisciplina.domain.entities.City;
 import com.pucpr.projetoDisciplina.domain.entities.Country;
 import com.pucpr.projetoDisciplina.domain.entities.State;
 
-public class AddressResponseDto extends Address {
+public class AddressResponseDto {
 
     private long id;
 
@@ -22,42 +22,34 @@ public class AddressResponseDto extends Address {
         this.country = address.getCountry();
     }
 
-    @Override
     public long getId() {
         return id;
     }
 
-    @Override
     public void setId(long id) {
         this.id = id;
     }
 
-    @Override
     public City getCity() {
         return city;
     }
 
-    @Override
     public void setCity(City city) {
         this.city = city;
     }
 
-    @Override
     public State getState() {
         return state;
     }
 
-    @Override
     public void setState(State state) {
         this.state = state;
     }
 
-    @Override
     public Country getCountry() {
         return country;
     }
 
-    @Override
     public void setCountry(Country country) {
         this.country = country;
     }

@@ -12,13 +12,13 @@ public class SellerResponseDto {
 
     private List<Product> productsList;
 
-    private Address address;
+    private AddressResponseDto address;
 
     private String contact;
 
     public SellerResponseDto(Seller seller) {
         this.id = seller.getId();
-        this.productsList = seller.getProductsList();
+//        this.productsList = seller.getProductsList(); TODO: criar um dto para este atributo não sobrecarregar.
         this.address = new AddressResponseDto(seller.getAddress());
         this.contact = seller.getContact();
     }
@@ -39,11 +39,11 @@ public class SellerResponseDto {
         this.productsList = productsList;
     }
 
-    public Address getAddress() {
+    public AddressResponseDto getAddress() {
         return address;
     }
 
-    public void setAddress(Address address) {
+    public void setAddress(AddressResponseDto address) {
         this.address = address;
     }
 
