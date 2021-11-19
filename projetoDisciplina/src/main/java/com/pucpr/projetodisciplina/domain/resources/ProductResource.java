@@ -1,7 +1,7 @@
 package com.pucpr.projetodisciplina.domain.resources;
 
 import com.pucpr.projetodisciplina.domain.dtos.ProductResponseDto;
-import com.pucpr.projetodisciplina.domain.dtos.ProductWithQuantity;
+import com.pucpr.projetodisciplina.domain.dtos.ProductWithQuantityDTO;
 import com.pucpr.projetodisciplina.domain.dtos.RegisterProductDto;
 import com.pucpr.projetodisciplina.domain.entities.Product;
 import com.pucpr.projetodisciplina.domain.services.ProductService;
@@ -26,7 +26,7 @@ public class ProductResource {
     }
 
     @GetMapping("/quantidades")
-    public List<ProductWithQuantity> listAllProductsWithQuantity() {
+    public List<ProductWithQuantityDTO> listAllProductsWithQuantity() {
         return productService.getAllWithQuantity();
     }
 

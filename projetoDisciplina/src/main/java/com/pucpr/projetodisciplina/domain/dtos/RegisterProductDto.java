@@ -73,7 +73,6 @@ public class RegisterProductDto {
     public List<Attribute> createAttributes() {
         List<Attribute> attributeList = new ArrayList<>();
 
-
         attributes.forEach(attributeDto -> attributeList.add(attributeDto.convert()));
 
         return attributeList;
