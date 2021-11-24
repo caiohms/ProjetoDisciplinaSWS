@@ -1,23 +1,33 @@
 package com.pucpr.projetodisciplina.domain.config;
 
+import com.pucpr.projetodisciplina.domain.repositories.UserRepository;
+import com.pucpr.projetodisciplina.domain.services.LoginUserDetailService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
 
+    @Autowired
+    private LoginUserDetailService loginUserDetailService;
+
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.csrf().disable().authorizeRequests()
                 .antMatchers("/").permitAll()
                 .antMatchers(HttpMethod.POST, "/login").permitAll()
-                .antMatchers("/api/*").authenticated().and()
+                .antMatchers("/produtos").authenticated().and()
 
                 // filtra requisições de login
                 .addFilterBefore(new JWTLoginFilter("/login", authenticationManager()),
@@ -30,7 +40,18 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        // cria uma conta default
-        auth.inMemoryAuthentication().withUser("servico").password("{noop}servico").roles("ADMIN");
+        // Create a default account
+
+        auth.userDetailsService(loginUserDetailService);
+
+//        auth.inMemoryAuthentication()
+//                .withUser("admin")
+//                .password("password")
+//                .roles("ADMIN");
+    }
+
+    @Bean
+    PasswordEncoder passwordEncoder(){
+        return new BCryptPasswordEncoder();
     }
 }
