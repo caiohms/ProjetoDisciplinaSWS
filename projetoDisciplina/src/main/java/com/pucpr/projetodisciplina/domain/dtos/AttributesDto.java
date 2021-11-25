@@ -1,23 +1,25 @@
 package com.pucpr.projetodisciplina.domain.dtos;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.pucpr.projetodisciplina.domain.entities.Attribute;
 
 public class AttributesDto {
 
-    private String id;
+    @JsonProperty("id")
+    private String type;
 
     private String value_name;
 
     public Attribute convert() {
-        return new Attribute(getValue_name());
+        return new Attribute(getType(), getValue_name());
     }
 
-    public String getId() {
-        return id;
+    public String getType() {
+        return type;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String getValue_name() {

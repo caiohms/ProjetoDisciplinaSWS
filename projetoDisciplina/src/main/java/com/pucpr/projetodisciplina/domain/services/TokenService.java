@@ -1,5 +1,6 @@
 package com.pucpr.projetodisciplina.domain.services;
 
+import com.pucpr.projetodisciplina.domain.entities.User;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

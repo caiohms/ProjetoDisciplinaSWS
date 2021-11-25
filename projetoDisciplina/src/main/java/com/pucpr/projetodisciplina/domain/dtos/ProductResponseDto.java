@@ -11,13 +11,13 @@ public class ProductResponseDto {
 
     private String site_id;
 
-    private SellerResponseDto seller;
-
     private String title;
 
     private int id_integracao;
 
     private String subtitle;
+
+    private long seller_id;
 
     private int price;
 
@@ -39,15 +39,19 @@ public class ProductResponseDto {
 
     private String permalink;
 
+    private AddressResponseDto seller_address;
+
+    private String seller_contact;
+
     private List<Attribute> attributes;
 
     public ProductResponseDto(Product product) {
         this.id = product.getId();
         this.site_id = product.getSite_id();
-        this.seller = new SellerResponseDto(product.getSeller());
         this.title = product.getTitle();
         this.id_integracao = product.getId_integracao();
         this.subtitle = product.getSubtitle();
+        this.seller_id = product.getSeller().getId();
         this.price = product.getPrice();
         this.base_price = product.getBase_price();
         this.original_price = product.getOriginal_price();
@@ -58,6 +62,8 @@ public class ProductResponseDto {
         this.stop_time = product.getStop_time();
         this.condition = product.getProduct_condition();
         this.permalink = product.getPermalink();
+        this.seller_address = new AddressResponseDto(product.getSeller().getAddress());
+        this.seller_contact = product.getSeller().getContact();
         this.attributes = product.getAttributes();
     }
 
@@ -75,14 +81,6 @@ public class ProductResponseDto {
 
     public void setSite_id(String site_id) {
         this.site_id = site_id;
-    }
-
-    public SellerResponseDto getSeller() {
-        return seller;
-    }
-
-    public void setSeller(SellerResponseDto seller) {
-        this.seller = seller;
     }
 
     public String getTitle() {
@@ -107,6 +105,14 @@ public class ProductResponseDto {
 
     public void setSubtitle(String subtitle) {
         this.subtitle = subtitle;
+    }
+
+    public long getSeller_id() {
+        return seller_id;
+    }
+
+    public void setSeller_id(long seller_id) {
+        this.seller_id = seller_id;
     }
 
     public int getPrice() {
@@ -187,6 +193,22 @@ public class ProductResponseDto {
 
     public void setPermalink(String permalink) {
         this.permalink = permalink;
+    }
+
+    public AddressResponseDto getSeller_address() {
+        return seller_address;
+    }
+
+    public void setSeller_address(AddressResponseDto seller_address) {
+        this.seller_address = seller_address;
+    }
+
+    public String getSeller_contact() {
+        return seller_contact;
+    }
+
+    public void setSeller_contact(String seller_contact) {
+        this.seller_contact = seller_contact;
     }
 
     public List<Attribute> getAttributes() {

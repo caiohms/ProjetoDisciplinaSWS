@@ -1,7 +1,7 @@
 package com.pucpr.projetodisciplina.domain.services;
 
 import com.pucpr.projetodisciplina.domain.dtos.ProductResponseDto;
-import com.pucpr.projetodisciplina.domain.dtos.ProductWithQuantity;
+import com.pucpr.projetodisciplina.domain.dtos.ProductWithQuantityDTO;
 import com.pucpr.projetodisciplina.domain.dtos.RegisterProductDto;
 import com.pucpr.projetodisciplina.domain.entities.Product;
 import com.pucpr.projetodisciplina.domain.repositories.*;
@@ -51,10 +51,10 @@ public class ProductService {
         );
     }
 
-    public List<ProductWithQuantity> getAllWithQuantity() {
-        List<ProductWithQuantity> productsList = new ArrayList<>();
+    public List<ProductWithQuantityDTO> getAllWithQuantity() {
+        List<ProductWithQuantityDTO> productsList = new ArrayList<>();
         productRepository.findAll().forEach(product -> productsList
-                .add(new ProductWithQuantity(product.getTitle(), product.getAvailable_quantity())));
+                .add(new ProductWithQuantityDTO(product.getTitle(), product.getAvailable_quantity())));
         return productsList;
     }
 
