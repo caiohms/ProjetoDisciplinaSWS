@@ -67,7 +67,7 @@ public class RegisterProductDto {
 
         return new Product(getSite_id(), getTitle(), getId_integracao(), getSubtitle(), newSeller,
                 getPrice(), getBase_price(), getOriginal_price(), getCurrency_id(), getInitial_quantity(),
-                getAvailable_quantity(), getStart_time(), getStop_time(), getCondition(), getPermalink(), newAttributes);
+                getAvailable_quantity(), getStart_time(), getStop_time(), getCondition(), "", newAttributes);
     }
 
     public List<Attribute> createAttributes() {

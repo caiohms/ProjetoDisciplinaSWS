@@ -30,12 +30,6 @@ public class ProductResource {
         return productService.getAllWithQuantity();
     }
 
-    @GetMapping("/test")
-    public ResponseEntity<String> createTestProduct() {
-        productService.createTestProducts();
-        return ResponseEntity.ok().build();
-    }
-
     @GetMapping("/{id}")
     public ProductResponseDto getProductbyId(@PathVariable Long id) {
         return productService.getById(id);

@@ -61,7 +61,7 @@ public class ProductResponseDto {
         this.start_time = product.getStart_time();
         this.stop_time = product.getStop_time();
         this.condition = product.getProduct_condition();
-        this.permalink = product.getPermalink();
+        this.permalink = "localhost:8080/produtos/" + getId();
         this.seller_address = new AddressResponseDto(product.getSeller().getAddress());
         this.seller_contact = product.getSeller().getContact();
         this.attributes = product.getAttributes();
