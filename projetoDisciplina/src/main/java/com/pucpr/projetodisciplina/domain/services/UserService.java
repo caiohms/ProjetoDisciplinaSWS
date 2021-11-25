@@ -16,8 +16,8 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public User saveUser(LoginDto register) {
-        User user = register.convertRegister();
+    public User saveUser(LoginDto register) throws Exception {
+        User user = register.convertRegister(userRepository);
         userRepository.save(user);
         return user;
     }
