@@ -1,11 +1,7 @@
 package com.pucpr.projetodisciplina.domain.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.Gson;
 import com.pucpr.projetodisciplina.domain.dtos.LoginDto;
-import com.pucpr.projetodisciplina.domain.entities.Login;
-import com.pucpr.projetodisciplina.domain.entities.User;
-import com.pucpr.projetodisciplina.domain.repositories.UserRepository;
 import com.pucpr.projetodisciplina.domain.services.TokenService;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -19,7 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Collections;
-import java.util.Optional;
 
 public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
 
@@ -31,8 +26,6 @@ public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
             throws AuthenticationException, IOException {
-
-//        LoginDto login = new Gson().fromJson(request.getReader(), LoginDto.class);
 
         LoginDto userLogin = new ObjectMapper()
                 .readValue(request.getInputStream(), LoginDto.class);

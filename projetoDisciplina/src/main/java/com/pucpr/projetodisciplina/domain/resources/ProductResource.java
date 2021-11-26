@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/produtos")
@@ -39,6 +40,14 @@ public class ProductResource {
     public ProductResponseDto addProduct(@RequestBody RegisterProductDto product) {
         Product newProduct = productService.saveProduct(product);
         return new ProductResponseDto(newProduct);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<ProductResponseDto> editProduct(@PathVariable Long id, @RequestBody RegisterProductDto product) {
+        ResponseEntity<Product> editedProduct = productService.editProduct(id, product);
+        return new ResponseEntity<>(
+                new ProductResponseDto(Objects.requireNonNull(editedProduct.getBody())),
+                editedProduct.getStatusCode());
     }
 
     @DeleteMapping("/{id}")

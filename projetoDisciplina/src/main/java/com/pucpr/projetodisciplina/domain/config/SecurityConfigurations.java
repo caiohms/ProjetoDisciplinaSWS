@@ -1,12 +1,10 @@
 package com.pucpr.projetodisciplina.domain.config;
 
-import com.pucpr.projetodisciplina.domain.repositories.UserRepository;
 import com.pucpr.projetodisciplina.domain.services.LoginUserDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -27,7 +25,7 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
         httpSecurity.csrf().disable().authorizeRequests()
                 .antMatchers("/").permitAll()
                 .antMatchers(HttpMethod.POST, "/login").permitAll()
-                .antMatchers("/produtos").authenticated().and()
+                .antMatchers("/produtos/**").authenticated().and()
 
                 // filtra requisições de login
                 .addFilterBefore(new JWTLoginFilter("/login", authenticationManager()),
@@ -42,7 +40,8 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         // Create a default account
 
-        auth.userDetailsService(loginUserDetailService);
+        auth.userDetailsService(loginUserDetailService)
+                .passwordEncoder(passwordEncoder());
 
 //        auth.inMemoryAuthentication()
 //                .withUser("admin")
@@ -51,7 +50,7 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    PasswordEncoder passwordEncoder(){
+    PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 }

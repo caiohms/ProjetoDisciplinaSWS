@@ -1,9 +1,7 @@
 package com.pucpr.projetodisciplina.domain.dtos;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.pucpr.projetodisciplina.domain.entities.User;
 import com.pucpr.projetodisciplina.domain.repositories.UserRepository;
-import javassist.tools.web.BadHttpRequest;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 
 import java.util.Optional;
@@ -14,7 +12,8 @@ public class LoginDto {
 
     private String password;
 
-    public LoginDto() {}
+    public LoginDto() {
+    }
 
     public LoginDto(User user) {
         this.username = user.getUsername();
@@ -45,7 +44,7 @@ public class LoginDto {
         if (optionalUser.isEmpty()) {
             return new User(getUsername(), getPassword());
         } else {
-            throw new Exception("User already exist");
+            throw new Exception("User already exists");
         }
     }
 }

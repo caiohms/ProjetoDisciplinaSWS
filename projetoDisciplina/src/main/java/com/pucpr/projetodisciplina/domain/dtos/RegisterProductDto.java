@@ -55,15 +55,14 @@ public class RegisterProductDto {
                                  CityRepository cityRepository, StateRepository stateRepository,
                                  CountryRepository countryRepository) {
 
-        Address sellerAddress = seller_address.convert(addressRepository, cityRepository, stateRepository,
-                countryRepository);
+        Address sellerAddress = seller_address.convert(addressRepository, cityRepository, stateRepository, countryRepository);
+
         Seller newSeller = createOrFindSeller(sellerRepository);
         List<Attribute> newAttributes = createAttributes();
 
-        if (sellerAddress.getSeller() == null) {
-            newSeller.setAddress(sellerAddress);
-            sellerAddress.setSeller(newSeller);
-        }
+        if (newSeller.getAddress() == null) newSeller.setAddress(sellerAddress);
+
+        if (sellerAddress.getSeller() == null) sellerAddress.setSeller(newSeller);
 
         return new Product(getSite_id(), getTitle(), getId_integracao(), getSubtitle(), newSeller,
                 getPrice(), getBase_price(), getOriginal_price(), getCurrency_id(), getInitial_quantity(),

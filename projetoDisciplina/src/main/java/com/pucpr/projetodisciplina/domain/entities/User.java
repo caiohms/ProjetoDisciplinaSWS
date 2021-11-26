@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Collections;
 
 @Entity
 public class User implements UserDetails, Serializable {
@@ -20,7 +21,8 @@ public class User implements UserDetails, Serializable {
     private String username;
     private String password;
 
-    public User() {}
+    public User() {
+    }
 
     public User(String username, String password) {
         this.username = username;
@@ -29,7 +31,7 @@ public class User implements UserDetails, Serializable {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return Collections.emptyList();
     }
 
     @Override
